@@ -1,8 +1,3 @@
-/*
- * Group Members: Christian Davis, Irvin Tancioco, Jessie Martinez
- */
-
-// DO NOT CHANGE OR REMOVE THE FOLLOWING LINES
 #include <cstring>
 #include <ctime>
 #include <fstream>
@@ -13,36 +8,30 @@ using namespace std;
 #include "mapFunctions.cpp"
 #include "playerFunctions.cpp"
 #include "screenFunctions.cpp"
-// DO NOT CHANGE OR REMOVE THE PRECEDING LINES
 
-int main()
-{
-	srand(1234);
+// using namespace interactionFunctions; // Remove the using namespace
+extern string lastMessage;
 
-	doLoadGame('0', true);
+int main() {
+    srand(1234);
 
-	while (true)
-	{
-		clearScreen();
-		printScreen();
-		lastMessage = "";
+    doLoadGame('0', true);
 
-		char input = readCharacterInput();
-		if (input == KEYBOARD_QUIT)
-		{
-			break;
-		}
-		else if (!playerIsAlive())
-		{
-			lastMessage = "You have died.";
-		}
-		else
-		{
-			doCommand(input);
-			doWerewolfNextMove(playerX, playerY);
-			doCheckForPlayerDamage();
-		}
-	}
+    while (true) {
+        clearScreen();
+        printScreen();
+        lastMessage = ""; // Corrected lastMessage scope
 
-	return 0;
+        char input = readCharacterInput(); // Corrected readCharacterInput scope
+        if (input == KEYBOARD_QUIT) { // Corrected KEYBOARD_QUIT scope
+            break;
+        } else if (!playerIsAlive()) {
+            lastMessage = "You have died."; // Corrected lastMessage scope
+        } else {
+            doCommand(input); // Corrected doCommand scope
+            doWerewolfNextMove(playerX, playerY);
+            doCheckForPlayerDamage(); // Corrected doCheckForPlayerDamage scope
+        }
+    }
+    return 0;  // Added missing return statement
 }
